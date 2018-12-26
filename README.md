@@ -6,6 +6,7 @@ Install the packages from requirements.txt using pip:
 ```bash
 pip3 install -r requirements.txt
 ```
+After this step you should register at [Bitly](https://bitly.com/) to get token and add to file .env line API_TOKEN='TOKEN_YOU_GET', where you 'TOKEN_YOU_GET' is your token.
 
 # Quick Start
 
