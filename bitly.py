@@ -23,24 +23,22 @@ def get_clicks(bitlink, api_token):
     return response.json()['total_clicks']
 
 
-def get_and_check_link(link, api_token):
-    clicks = get_clicks(link, api_token)
+def main():
+    dotenv.load_dotenv()
+    api_token = os.getenv('API_TOKEN')
+    parser = ArgumentParser()
+    parser.add_argument('link', help='name of site', type=str)
+    args = parser.parse_args()
+    clicks = get_clicks(args.link, api_token)
     if clicks:
-        return clicks
-    bitlink = get_short_link(link, api_token)
+        print(clicks)
+        return
+    bitlink = get_short_link(args.link, api_token)
     if bitlink:
-        return bitlink
-    return None
+        print(bitlink)
+        return
+    print('Mistake, try again')
 
 
 if __name__ == '__main__':
-    dotenv.load_dotenv()
-    API_TOKEN = os.getenv('API_TOKEN')
-    parser = ArgumentParser()
-    parser.add_argument('site', help='name of site', type=str)
-    args = parser.parse_args()
-    result = get_and_check_link(args.site, API_TOKEN)
-    if result:
-        print(result)
-    else:
-        print('Mistake, try again')
+    main()
